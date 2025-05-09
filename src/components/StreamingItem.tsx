@@ -28,7 +28,7 @@ const StreamingItem = ({
   const handleAddFavorite = () => {
     const alreadyFavorited = favorites?.some((fav) => fav.id === item.id);
     if (!alreadyFavorited) {
-      setFavorites((prev) => [...prev, item]);
+      setFavorites([...favorites, item]);
     }
   };
 

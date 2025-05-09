@@ -11,8 +11,8 @@ interface PlayerContextType {
   setPlaybackState: (state: PlaybackState) => void;
   progress: { [key: string]: number };
   setProgress: (id: string, playedSeconds: number) => void;
-  favorites: StreamingItemT[] | null;
-  setFavorites: (content: StreamingItemT[] | []) => void;
+  favorites: StreamingItemT[];
+  setFavorites: React.Dispatch<React.SetStateAction<StreamingItemT[]>>;
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
@@ -25,7 +25,7 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [progress, setProgress] = useState<{ [key: string]: number }>({});
 
-  const [favorites, setFavorites] = useState<StreamingItemT[] | []>([]);
+  const [favorites, setFavorites] = useState<StreamingItemT[]>([]);
 
   const handleProgress = (id: string, playedSeconds: number) => {
     setProgress((prevProgress) => ({
