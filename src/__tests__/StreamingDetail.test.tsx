@@ -12,6 +12,7 @@ jest.mock("@/app/context/PlayerContext", () => ({
   })),
 }));
 
+// eslint-disable-next-line react/display-name
 jest.mock("react-player", () => () => <div>Mocked ReactPlayer</div>);
 
 const mockItem: StreamingItemT = {
