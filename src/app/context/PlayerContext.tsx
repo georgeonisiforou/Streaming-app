@@ -1,29 +1,38 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
+import { StreamingItemT } from "../types";
 
 export type PlaybackState = "playing" | "paused";
-
-type ContentItem = {
-  id: string;
-  title?: string;
-  videoUrl?: string;
-};
-
 interface PlayerContextType {
-  selectedContent: ContentItem | null;
-  setSelectedContent: (content: ContentItem) => void;
+  selectedContent: StreamingItemT | null;
+  setSelectedContent: (content: StreamingItemT | null) => void;
   playbackState: PlaybackState;
   setPlaybackState: (state: PlaybackState) => void;
+  progress: { [key: string]: number };
+  setProgress: (id: string, playedSeconds: number) => void;
+  favorites: StreamingItemT[] | null;
+  setFavorites: (content: StreamingItemT[] | []) => void;
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
-  const [selectedContent, setSelectedContent] = useState<ContentItem | null>(
+  const [selectedContent, setSelectedContent] = useState<StreamingItemT | null>(
     null
   );
   const [playbackState, setPlaybackState] = useState<PlaybackState>("paused");
+
+  const [progress, setProgress] = useState<{ [key: string]: number }>({});
+
+  const [favorites, setFavorites] = useState<StreamingItemT[] | []>([]);
+
+  const handleProgress = (id: string, playedSeconds: number) => {
+    setProgress((prevProgress) => ({
+      ...prevProgress,
+      [id]: playedSeconds,
+    }));
+  };
 
   return (
     <PlayerContext.Provider
@@ -32,6 +41,10 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
         setSelectedContent,
         playbackState,
         setPlaybackState,
+        progress,
+        setProgress: handleProgress,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

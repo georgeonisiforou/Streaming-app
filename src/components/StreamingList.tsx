@@ -8,7 +8,7 @@ interface StreamingListProps {
 
 const StreamingList = ({ streamingItems }: StreamingListProps) => {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap lg:gap-6 gap-4 justify-center">
       {streamingItems.map((item: StreamingItemT) => (
         <StreamingItem
           id={item.id}
@@ -16,6 +16,7 @@ const StreamingList = ({ streamingItems }: StreamingListProps) => {
           title={item.title}
           description={item.description}
           thumbnail={item.thumbnailUrl}
+          item={item}
         />
       ))}
     </div>

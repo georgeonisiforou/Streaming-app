@@ -1,25 +1,18 @@
-import { StreamingItemT } from "@/app/types";
+"use client";
+
+import { usePlayer } from "@/app/context/PlayerContext";
+import StreamingDetail from "@/components/StreamingDetail";
 import { notFound } from "next/navigation";
+import React from "react";
 
-async function fetchData() {
-  const res = await fetch("http://localhost:3000/api/content", {
-    cache: "no-store",
-  });
-  return res.json();
-}
+export default function StreamingDetailPage() {
+  const { selectedContent } = usePlayer();
 
-interface PageProps {
-  params: { id: string };
-}
+  if (!selectedContent) return notFound();
 
-export default async function StreamingDetail({ params }: PageProps) {
-  const { items } = await fetchData();
-
-  const selectedItem = items.find(
-    (item: StreamingItemT) => item.id === params.id
+  return (
+    <div className="p-4 pt-16 sm:p-8 sm:pt-16 w-full">
+      <StreamingDetail selectedItem={selectedContent} />
+    </div>
   );
-
-  if (!selectedItem) return notFound();
-
-  return <div>{selectedItem.title}</div>;
 }

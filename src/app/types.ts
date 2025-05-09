@@ -7,6 +7,7 @@ export interface StreamingItemT {
   duration: string;
   releaseYear: number;
   genre: string[];
+  rating: number;
 }
 
 export interface ThumbnailItemT {
@@ -14,4 +15,5 @@ export interface ThumbnailItemT {
   title: string;
   thumbnail: string;
   description: string;
+  item: StreamingItemT;
 }
