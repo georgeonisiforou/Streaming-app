@@ -65,5 +65,15 @@ Clean and accessible UI with TailwindCSS
 
 Hover animations and transitions with Framer Motion
 
+"Add to favorites" icon on each movie card
+
+Navbar with links for Homepage and user's favorites page
+
+Playback history saved in global state for each streaming item. 
+
+"Play from the beginning" button in StreamingDetail component in order to give the user the option to restart the movie.
+
+Heart icon in StreamingDetail component as an indicator that the current item is in user's favorites list.
+
 
 
